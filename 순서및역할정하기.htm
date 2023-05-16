@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>순서/역할 정하기</title>
+</head>
+<body>
+  <h1>순서/역할 정하기</h1>
+
+  <div>
+    <label for="input-text1">참여자 이름 (5명 이하, 쉼표로 구분) :</label>
+    <input type="text" id="input-text1">
+  </div>
+
+  <div>
+    <label for="input-text2">역할 (5개 이하, 쉼표로 구분) :</label>
+    <input type="text" id="input-text2">
+    <button onclick="displayRandomTexts()">확인</button>
+  </div>
+
+  <div id="output-container"></div>
+
+  <script>
+    // 텍스트 배치 함수
+    function displayRandomTexts() {
+      var inputText1Element = document.getElementById("input-text1");
+      var inputText2Element = document.getElementById("input-text2");
+      var inputText1 = inputText1Element.value;
+      var inputText2 = inputText2Element.value;
+
+      var texts1 = inputText1.split(",").map(text => text.trim()).filter(text => text !== '');
+      var texts2 = inputText2.split(",").map(text => text.trim()).filter(text => text !== '');
+
+      if (texts1.length === 0 || texts2.length === 0 || texts1.length > 5 || texts2.length > 5) {
+        alert("참여자 이름 및 역할은 1개 이상 5개 이하여야 합니다.");
+        return;
+      }
+
+      var outputContainer = document.getElementById("output-container");
+      outputContainer.innerHTML = '';
+
+      // 텍스트 랜덤 배치
+      var randomTexts1 = shuffleArray(texts1).slice(0, texts2.length);
+      var randomTexts2 = shuffleArray(texts2);
+
+      // 텍스트 출력
+      for (var i = 0; i < texts2.length; i++) {
+        var text1 = randomTexts1[i] || '';
+        var text2 = randomTexts2[i];
+
+        var textElement = document.createElement("p");
+        textElement.textContent = text1 + ' ' + text2;
+        outputContainer.appendChild(textElement);
+      }
+    }
+
+    // 배열 요소 랜덤 셔플
+    function shuffleArray(array) {
+      var shuffledArray = array.slice(); // 배열 복사
+
+      for (var i = shuffledArray.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = shuffledArray[i];
+        shuffledArray[i] = shuffledArray[j];
+        shuffledArray[j] = temp;
+      }
+
+      return shuffledArray;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>주사위게임</title>
+  <style>
+    .image {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="image-container"></div>
+  <button onclick="displayRandomImages()">주사위 굴리기</button>
+
+  <script>
+    // 이미지 URL 배열
+    var imageUrls = [
+      "one.png",
+      "two.png",
+      "three.png",
+      "four.png",
+      "five.png",
+      "six.png"
+    ];
+
+    // 이미지 출력 함수
+    function displayRandomImages() {
+      var container = document.getElementById("image-container");
+      container.innerHTML = ''; // 기존 이미지 삭제
+
+      for (var i = 0; i < 2; i++) {
+        // 랜덤한 인덱스 생성
+        var randomIndex = Math.floor(Math.random() * imageUrls.length);
+
+        // 이미지 요소 생성
+        var img = document.createElement("img");
+        img.src = imageUrls[randomIndex];
+        img.alt = "Image " + (i + 1);
+        img.className = "image";
+
+        // 이미지를 컨테이너에 추가
+        container.appendChild(img);
+      }
+    }
+  </script>
+</body>
+</html>

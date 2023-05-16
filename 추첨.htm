@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>추첨</title>
+</head>
+<body>
+  <label for="number-input">추첨 번호 수 (1~99) :</label>
+  <input type="number" id="number-input" min="1" max="99">
+  <button onclick="generateRandomNumber()">추첨</button>
+  <p id="random-number"></p>
+
+  <script>
+    function generateRandomNumber() {
+      var maxNumberInput = document.getElementById("number-input");
+      var maxNumber = parseInt(maxNumberInput.value);
+
+      // 1부터 최댓값까지의 랜덤한 정수 생성
+      var randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+
+      var randomNumberElement = document.getElementById("random-number");
+      randomNumberElement.textContent = "당첨된 번호 : " + randomNumber;
+    }
+  </script>
+</body>
+</html>
